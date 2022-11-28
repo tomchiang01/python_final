@@ -1,43 +1,14 @@
-import os, sys
-import shutil
-from pathlib import Path
+from threading import Thread
 
 try:
-    from bing import Bing
-except ImportError:  # Python 3
-    from .bing import Bing
+    import downloader
+except:
+    import search.downloader as downloader
 
-
-def search(query, limit=100, output_dir='temp', adult_filter_off=True, 
-force_replace=False, timeout=60, filter="", verbose=True):
-
-    # engine = 'bing'
-    if adult_filter_off:
-        adult = 'off'
-    else:
-        adult = 'on'
-
-    
-    image_dir = Path(output_dir).absolute()
-
-    if force_replace:
-        if Path.isdir(image_dir):
-            shutil.rmtree(image_dir)
-
-    # check directory and create if necessary
-    try:
-        if not Path.is_dir(image_dir):
-            Path.mkdir(image_dir, parents=True)
-
-    except Exception as e:
-        print('[Error]Failed to create directory.', e)
-        sys.exit(1)
-        
-    if verbose:
-        print("[%] Downloading Images to {}".format(str(image_dir.absolute())))
-    bing = Bing(query, limit, image_dir, adult, timeout, filter, verbose)
-    bing.run()
-
+def search(key_word, limit, output_dir, verbose):
+    T=Thread(target=downloader.download,args=(key_word, limit,  output_dir, False, False, 5, "", verbose, ))
+    T.start()
+          
 
 if __name__ == '__main__':
-    search("cat", limit=10,  output_dir="temp", adult_filter_off=False, force_replace=False, timeout=5, verbose=True)
+    search("cat", limit=10,  output_dir="temp", verbose=True)

@@ -3,9 +3,13 @@ usage:
 
 import search
 
-search.search(query, limit, output_dir, verbose)
+S = search.Search(query, limit, output_dir, verbose)
 
 query::key word
 limit::number of images to search for
 output_dir::name of the folder to save the images
 verbose::print current state if true
+
+//////////////////////////////////////////////////////
+
+S.kill() to stop searching

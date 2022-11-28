@@ -57,7 +57,8 @@ class Bing:
         request = urllib.request.Request(link, None, self.headers)
         image = urllib.request.urlopen(request, timeout=self.timeout).read()
         if not imghdr.what(None, image):
-            print('[Error]Invalid image, not saving {}\n'.format(link))
+            if self.verbose:
+                print('[Error]Invalid image, not saving {}\n'.format(link))
             raise ValueError('Invalid image, not saving {}\n'.format(link))
         with open(str(file_path), 'wb') as f:
             f.write(image)
@@ -84,7 +85,8 @@ class Bing:
 
         except Exception as e:
             self.download_count -= 1
-            print("[!] Issue getting: {}\n[!] Error:: {}".format(link, e))
+            if self.verbose:
+                print("[!] Issue getting: {}\n[!] Error:: {}".format(link, e))
 
     
     def run(self):
@@ -99,7 +101,8 @@ class Bing:
             response = urllib.request.urlopen(request)
             html = response.read().decode('utf8')
             if html ==  "":
-                print("[%] No more images are available")
+                if self.verbose:
+                    print("[%] No more images are available")
                 break
             links = re.findall('murl&quot;:&quot;(.*?)&quot;', html)
             if self.verbose:

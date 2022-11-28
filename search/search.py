@@ -1,14 +1,20 @@
 from threading import Thread
+import multiprocessing
 
 try:
     import downloader
 except:
     import search.downloader as downloader
 
-def search(key_word, limit, output_dir, verbose):
-    T=Thread(target=downloader.download,args=(key_word, limit,  output_dir, False, False, 5, "", verbose, ))
-    T.start()
+class Search:
+    def __init__(self,key_word, limit, output_dir, verbose):
+        self.proc = multiprocessing.Process(target=downloader.download,args=(key_word, limit,  output_dir, False, False, 5, "", verbose, ))
+        self.proc.start()
+        
+    def kill(self):
+        print("terminated")
+        self.proc.terminate()
           
 
 if __name__ == '__main__':
-    search("cat", limit=10,  output_dir="temp", verbose=True)
+    Search("cat", limit=10,  output_dir="temp", verbose=True)

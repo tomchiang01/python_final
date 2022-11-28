@@ -13,11 +13,10 @@ import shutil
 
 # Init
 path=os.path.abspath(".\\temp")
-if os.path.exists(path):
-    shutil.rmtree(path)
 
 filename = ""
 S
+key_word = ""
 
 root = Tk()
 root.geometry("300x400")
@@ -25,6 +24,7 @@ root.geometry("300x400")
 save_path = os.path.abspath('saved_images')
 if not os.path.exists(save_path):
     os.makedirs(save_path)
+
 
 # Function for buttons
 def next():
@@ -50,21 +50,34 @@ def save():
 def remove():
     os.chmod(path+"\\"+filename, stat.S_IWRITE)
     os.remove(path+"\\"+filename)
-    print(path+"\\"+filename)
     next()
     
 def quit():
     global S
-    S.kill()
+    try:
+        S.kill()
+    except:
+        pass
     root.destroy()
 
-def main():
-
+def f_search():
+    global entry
+    if entry.get() != '':
+        temp = entry.get()
+    print(temp)
     # Start searching
-    global S
-    key_word = input("Please enter a key word: ")
+    global S, key_word, path
+    if temp != key_word:
+        if os.path.exists(path):
+            shutil.rmtree(path)
+        key_word = temp
+    
+    print(key_word)
+    try:
+        S.kill()
+    except:
+        pass
     S = search.Search(key_word, limit=100,  output_dir="temp", verbose=False)
-
     print("Please wait...")
     time.sleep(1)
     files=os.listdir(path)
@@ -73,9 +86,6 @@ def main():
         files=os.listdir(path)
 
     print("Started")
-
-
-
     # Initial images
     files=os.listdir(path)
     filename=random.choice(files)
@@ -86,17 +96,25 @@ def main():
     Image1.image = test
     Image1.place(x=0, y=100)
 
-    # Build buttons
-    B_next = Button(root, text ="next", command = next)
-    B_next.place(x=0, y=0)
-    B_quit = Button(root, text ="save", command = save)
-    B_quit.place(x=50, y=0)
-    B_quit = Button(root, text ="remove", command = remove)
-    B_quit.place(x=100, y=0)
-    B_quit = Button(root, text ="quit", command = quit)
-    B_quit.place(x=170, y=0)
 
-    root.mainloop()
+# Build buttons
+entry = Entry(root)
+entry.place(x=50, y=10)
+B_search = Button(root, text ="search", command = f_search)
+B_search.place(x=220, y=10)
+B_next = Button(root, text ="next", command = next)
+B_next.place(x=50, y=60)
+B_quit = Button(root, text ="save", command = save)
+B_quit.place(x=100, y=60)
+B_quit = Button(root, text ="remove", command = remove)
+B_quit.place(x=150, y=60)
+B_quit = Button(root, text ="quit", command = quit)
+B_quit.place(x=220, y=60)
+    
 
 if __name__ == '__main__':
-    main()
+    root.mainloop()
+    try:
+        S.kill()
+    except:
+        pass

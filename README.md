@@ -1,5 +1,5 @@
-v1:\n
-\tusage:
+v1:
+  usage:
     py v1\main.py
   function:
     keyword input

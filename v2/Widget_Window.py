@@ -14,6 +14,7 @@ class Widget_Window:
         self.refresh_time = 0
         self.downloader = None
         self.filename = ''
+        self.ready = False
 
         path = os.path.abspath(".\\temp")
         if os.path.exists(path):
@@ -40,31 +41,34 @@ class Widget_Window:
         self.b_save.place(x=120, y=70)
         self.b_remove = tk.Button(self.master, text ="remove", command = self.remove)
         self.b_remove.place(x=190, y=70)
-        self.refresh_img()
+
 
     def open_setting(self):
         self.newWindow = tk.Toplevel(self.master)
         self.setting_window = Setting_Window(self.newWindow, self)
 
     def next(self):
-        self.refresh_img()
+        if self.ready:
+            self.refresh_img()
     
     def save(self):
-        path = os.path.abspath(".\\temp")
-        image_save = Image.open(path+"\\"+self.filename) 
-        
-        # save a image using extension
+        if self.ready:
+            path = os.path.abspath(".\\temp")
+            image_save = Image.open(path+"\\"+self.filename) 
+            
+            # save a image using extension
 
-        save_path = os.path.abspath('saved_images')
-        if not os.path.exists(save_path):
-            os.makedirs(save_path)
-        image_save = image_save.save(save_path+"\\"+self.filename)
+            save_path = os.path.abspath('saved_images')
+            if not os.path.exists(save_path):
+                os.makedirs(save_path)
+            image_save = image_save.save(save_path+"\\"+self.filename)
         
     def remove(self):
-        path = os.path.abspath(".\\temp")
-        os.chmod(path+"\\"+self.filename, stat.S_IWRITE)
-        os.remove(path+"\\"+self.filename)
-        self.next()
+        if self.ready:
+            path = os.path.abspath(".\\temp")
+            os.chmod(path+"\\"+self.filename, stat.S_IWRITE)
+            os.remove(path+"\\"+self.filename)
+            self.next()
         
     def refresh_img(self):
         path = os.path.abspath(".\\temp")
@@ -83,6 +87,8 @@ class Widget_Window:
             self.Image1 = tk.Label(image=test)
             self.Image1.image = test
             self.Image1.place(x=0, y=100)
+
+            self.ready = True
 
             if self.refresh_time != 0:
                 try:

@@ -13,3 +13,10 @@ v2:
   update:
     added setting window
     added auto refresh
+
+  todo:
+    add more choices in setting
+    improve the setting ui
+    call functions in widget window by mouse motion
+    
+    pack as apk file

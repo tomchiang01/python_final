@@ -6,3 +6,10 @@ v1:
     next button
     remove button
     save button
+
+v2:
+  usage:
+    py v2\main.py
+  update:
+    added setting window
+    added auto refresh

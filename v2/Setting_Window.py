@@ -12,8 +12,14 @@ class Setting_Window:
         self.master.geometry("300x300")
         self.l_key_word = tk.Label(self.master, text = "Key Word: ")
         self.l_key_word.place(x = 10, y = 10)
-        self.e_key_word = tk.Entry(self.master)
+        self.e_key_word_text = tk.StringVar()
+        self.e_key_word = tk.Entry(self.master, textvariable=self.e_key_word_text)
+        if self.widget.key_word == "":
+            self.e_key_word_text.set("None")
+        else:
+            self.e_key_word_text.set(self.widget.key_word)
         self.e_key_word.place(x = 100, y = 10)
+        
         self.b_set_key = tk.Button(self.master, text ="set", command = self.set_key_word)
         self.b_set_key.place(x = 250, y = 8)
         
@@ -21,7 +27,12 @@ class Setting_Window:
         self.l_refresh_time.place(x = 10, y = 40)
         self.e_refresh_time_text = tk.StringVar()
         self.e_refresh_time = tk.Entry(self.master, textvariable=self.e_refresh_time_text)
+        self.e_refresh_time_text.set(str(self.widget.refresh_time) + " min")
+        if self.widget.refresh_time <= 0:
+            self.widget.refresh_time = 0
+            self.e_refresh_time_text.set("Never")
         self.e_refresh_time.place(x = 100, y = 40)
+        
         self.b_set_time = tk.Button(self.master, text ="set", command = self.set_time)
         self.b_set_time.place(x = 250, y = 38)
 
@@ -39,18 +50,17 @@ class Setting_Window:
             pass
         self.widget.downloader = search.Search(self.widget.key_word, limit=100,  output_dir="temp", verbose=False)
         
-        self.widget.l_key2["text"] = self.widget.key_word
+        self.e_key_word_text.set(self.widget.key_word)
         self.widget.refresh_img()
         
         
     def set_time(self):
         try:
-            self.widget.refresh_time = int(self.e_refresh_time.get())
-            self.widget.l_time2["text"] = str(self.widget.refresh_time) + " min"
+            self.widget.refresh_time = float((self.e_refresh_time.get().split())[0])
+            self.e_refresh_time_text.set(str(self.widget.refresh_time) + " min")
             if self.widget.refresh_time <= 0:
                 self.widget.refresh_time = 0
-                self.widget.l_time2["text"] = "Never"
-
+                self.e_refresh_time_text.set("Never")
 
             
             if self.widget.refresh_time != 0:

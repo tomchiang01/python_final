@@ -1,6 +1,6 @@
 v1:
   usage:
-    py tkinter_version_v1.py
+    py v1\main.py
   function:
     keyword input
     next button

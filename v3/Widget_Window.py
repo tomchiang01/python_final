@@ -23,6 +23,7 @@ class Widget_Window:
         self.master = master
         self.master.title("Widget")
         self.master.geometry("300x350")
+        self.temp_size = 100
         self.b_setting = tk.Button(self.master, text = '設定', command = self.open_setting)
         self.b_setting.place(x = 240, y = 8)
 

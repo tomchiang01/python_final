@@ -36,6 +36,17 @@ class Setting_Window:
         self.b_set_time = tk.Button(self.master, text ="確定", command = self.set_time)
         self.b_set_time.place(x = 250, y = 38)
 
+
+        self.l_temp_size = tk.Label(self.master, text = "圖庫大小: ")
+        self.l_temp_size.place(x = 10, y = 70)
+        self.e_temp_size_text = tk.StringVar()
+        self.e_temp_size = tk.Entry(self.master, textvariable=self.e_temp_size_text)
+        self.e_temp_size_text.set(str(self.widget.temp_size))
+        self.e_temp_size.place(x = 100, y = 70)
+
+        self.b_set_temp_size = tk.Button(self.master, text ="確定", command = self.set_temp_size)
+        self.b_set_temp_size.place(x = 250, y = 68)
+
     def set_key_word(self):
         path=os.path.abspath(".\\temp")
         temp = self.e_key_word.get()
@@ -48,7 +59,7 @@ class Setting_Window:
             self.widget.downloader.kill()
         except:
             pass
-        self.widget.downloader = search.Search(self.widget.key_word, limit=100,  output_dir="temp", verbose=False)
+        self.widget.downloader = search.Search(self.widget.key_word, limit=self.widget.temp_size,  output_dir="temp", verbose=False)
         
         self.e_key_word_text.set(self.widget.key_word)
         self.widget.refresh_img()
@@ -57,10 +68,10 @@ class Setting_Window:
     def set_time(self):
         try:
             self.widget.img_refresh_time = float((self.e_img_refresh_time.get().split())[0])
-            self.e_img_refresh_time_text.set(str(self.widget.img_refresh_time) + " min")
+            self.e_img_refresh_time_text.set(str(self.widget.img_refresh_time) + " 分鐘")
             if self.widget.img_refresh_time <= 0:
                 self.widget.img_refresh_time = 0
-                self.e_img_refresh_time_text.set("Never")
+                self.e_img_refresh_time_text.set("永不")
 
             
             if self.widget.img_refresh_time != 0:
@@ -71,4 +82,18 @@ class Setting_Window:
                 self.widget.alarm = threading.Timer(self.widget.img_refresh_time * 60, self.widget.refresh_img)
                 self.widget.alarm.start()
         except:
-            self.e_img_refresh_time_text.set('error input')
+            self.e_img_refresh_time_text.set('輪入格式錯誤')
+
+            
+        
+    def set_temp_size(self):
+        try:
+            self.widget.temp_size = int((self.e_temp_size.get().split())[0])
+            self.e_temp_size_text.set(str(self.widget.temp_size))
+            if self.widget.temp_size <= 0:
+                self.widget.temp_size = 1
+                self.e_temp_size_text.set('輪入格式錯誤')
+
+            
+        except:
+            self.e_temp_size_text.set('輪入格式錯誤')

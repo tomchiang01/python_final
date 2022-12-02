@@ -17,6 +17,8 @@ v2:
 v3:
   usage:
     py v3\main.py
+    or open v3\main.pyw dierctly
+    
   update:
     label text changed to chinese
     image ratio keep constant

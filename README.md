@@ -14,9 +14,15 @@ v2:
     added setting window
     added auto refresh
 
+v3:
+  usage:
+    py v3\main.py
+  update:
+    label text changed to chinese
+    image ratio keep constant
+
   todo:
     add more choices in setting
-    improve the setting ui
-    call functions in widget window by mouse motion
-    
+    improve the setting window ui
+    use mouse motion to replace button in widget window
     pack as apk file

@@ -26,12 +26,14 @@ class Setting_Window:
         self.l_img_refresh_time = tk.Label(self.master, text = "圖片刷新時間: ")
         self.l_img_refresh_time.place(x = 10, y = 40)
         self.e_img_refresh_time_text = tk.StringVar()
-        self.e_img_refresh_time = tk.Entry(self.master, textvariable=self.e_img_refresh_time_text)
-        self.e_img_refresh_time_text.set(str(self.widget.img_refresh_time) + " 分鐘")
+        self.e_img_refresh_time = tk.Entry(self.master, width = 15, textvariable=self.e_img_refresh_time_text)
+        self.e_img_refresh_time_text.set(str(self.widget.img_refresh_time))
         if self.widget.img_refresh_time <= 0:
             self.widget.img_refresh_time = 0
             self.e_img_refresh_time_text.set("永不")
         self.e_img_refresh_time.place(x = 100, y = 40)
+        self.l_img_refresh_time2 = tk.Label(self.master, text = "分鐘")
+        self.l_img_refresh_time2.place(x = 210, y = 40)
         
         self.b_set_time = tk.Button(self.master, text ="確定", command = self.set_time)
         self.b_set_time.place(x = 250, y = 38)
@@ -68,7 +70,7 @@ class Setting_Window:
     def set_time(self):
         try:
             self.widget.img_refresh_time = float((self.e_img_refresh_time.get().split())[0])
-            self.e_img_refresh_time_text.set(str(self.widget.img_refresh_time) + " 分鐘")
+            self.e_img_refresh_time_text.set(str(self.widget.img_refresh_time))
             if self.widget.img_refresh_time <= 0:
                 self.widget.img_refresh_time = 0
                 self.e_img_refresh_time_text.set("永不")

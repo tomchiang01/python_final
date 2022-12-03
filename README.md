@@ -16,7 +16,7 @@ v2:<br />
 <br />
 v3:<br />
 &emsp;usage:<br />
-&emsp;&emsp;1. py v3\main.py or open v3\main.pyw dierctly<br />
+&emsp;&emsp;1. py v3\main.py or open v3\main.pyw directly<br />
 &emsp;&emsp;2. open setting window by clicking "設定"<br />
 &emsp;&emsp;3. set the key word for search<br />
 &emsp;update:<br />

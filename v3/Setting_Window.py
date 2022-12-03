@@ -10,7 +10,7 @@ class Setting_Window:
         self.widget = widget
         self.master.title("設定")
         self.master.geometry("300x300")
-        self.l_key_word = tk.Label(self.master, text = "關鍵字: ")
+        self.l_key_word = tk.Label(self.master, text = "主題: ")
         self.l_key_word.place(x = 10, y = 10)
         self.e_key_word_text = tk.StringVar()
         self.e_key_word = tk.Entry(self.master, textvariable=self.e_key_word_text)

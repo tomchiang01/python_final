@@ -16,9 +16,10 @@ v2:
 
 v3:
   usage:
-    py v3\main.py
-    or open v3\main.pyw dierctly
-    
+    1. py v3\main.py or open v3\main.pyw dierctly
+    2. open setting window by clicking "設定"
+    3. set the key word for search
+     
   update:
     label text changed to chinese
     image ratio keep constant

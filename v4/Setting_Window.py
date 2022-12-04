@@ -56,7 +56,7 @@ class Setting_Window:
             if os.path.exists(path):
                 shutil.rmtree(path)
             self.widget.key_word = temp
-            
+        self.widget.picid = 0
         try:
             self.widget.downloader.kill()
         except:

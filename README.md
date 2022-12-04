@@ -23,8 +23,15 @@ v3:<br />
 &emsp;&emsp;label text changed to chinese<br />
 &emsp;&emsp;image ratio keep constant<br />
 <br />
+v4:<br />
+&emsp;usage:<br />
+&emsp;&emsp;py v4\main.py or open v4\main.pyw directly<br />
+&emsp;update:<br />
+&emsp;&emsp;added btn [last picture] & remove random choose picture<br />
+<br />
 &emsp;todo:<br />
 &emsp;&emsp;add more choices in setting<br />
 &emsp;&emsp;improve the setting window ui<br />
 &emsp;&emsp;use mouse motion to replace button in widget window<br />
 &emsp;&emsp;pack as apk file
+

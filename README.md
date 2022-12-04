@@ -28,6 +28,7 @@ v4:<br />
 &emsp;&emsp;py v4\main.py or open v4\main.pyw directly<br />
 &emsp;update:<br />
 &emsp;&emsp;added btn [last picture] & remove random choose picture<br />
+&emsp;&emsp;added btn [OK] & [cancel] to setting window<br />
 <br />
 &emsp;todo:<br />
 &emsp;&emsp;add more choices in setting<br />

@@ -17,6 +17,7 @@ class Widget_Window:
         self.picdict = []
         self.picid = 0
         self.ready = False
+        self.user_save_dir = os.path.abspath('saved_images')
 
         path = os.path.abspath(".\\temp")
         if os.path.exists(path):
@@ -59,7 +60,8 @@ class Widget_Window:
             image_save = Image.open(path+"\\"+self.filename) 
             
             # save a image using extension
-            save_path = os.path.abspath('saved_images')
+            # save_path = os.path.abspath('saved_images')
+            save_path = self.user_save_dir
             if not os.path.exists(save_path):
                 os.makedirs(save_path)
             image_save = image_save.save(save_path+"\\"+self.filename)

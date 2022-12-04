@@ -1,4 +1,5 @@
 import tkinter as tk
+import tkinter.filedialog
 import os
 import shutil
 import search
@@ -45,6 +46,15 @@ class Setting_Window:
         self.e_temp_size = tk.Entry(self.master, textvariable=self.e_temp_size_text)
         self.e_temp_size_text.set(str(self.widget.temp_size))
         self.e_temp_size.place(x = 100, y = 70)
+        
+        self.l_userDir = tk.Label(self.master, text = "自訂存放位置: ")
+        self.l_userDir.place(x = 10, y = 100)
+        self.b_set_userDir = tk.Button(self.master, text ="瀏覽", command = self.findUserDir)
+        self.b_set_userDir.place(x = 250, y = 100)
+        self.e_userDir_text = tk.StringVar()
+        self.e_userDir_text.set(str(self.widget.user_save_dir))
+        self.e_userDir = tk.Entry(self.master, textvariable=self.e_userDir_text)
+        self.e_userDir.place(x = 100, y = 100)
 
         #self.b_set_temp_size = tk.Button(self.master, text ="確定", command = self.set_temp_size)
         #self.b_set_temp_size.place(x = 250, y = 68)
@@ -59,6 +69,7 @@ class Setting_Window:
         self.set_key_word()
         self.set_time()
         self.set_temp_size()
+        self.set_Dir()
         
 
     def set_key_word(self):
@@ -111,3 +122,17 @@ class Setting_Window:
             
         except:
             self.e_temp_size_text.set('輪入格式錯誤')
+            
+    def findUserDir(self):
+        dirName = tkinter.filedialog.askdirectory(
+                                          title = "Select a Folder",
+                                          )
+        self.e_userDir_text.set(dirName)
+        
+        
+    def set_Dir(self):
+        try:
+            self.widget.user_save_dir = self.e_userDir_text.get()
+        except:
+            self.e_userDir_text.set('輪入格式錯誤')
+        

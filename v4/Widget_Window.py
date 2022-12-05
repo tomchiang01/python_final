@@ -54,6 +54,7 @@ class Widget_Window:
         self.e_key_word.place(x = 50, y = 50)
         self.b_set_temp_size = tk.Button(self.master, text ="確定", command = self.set_key_word)
         self.b_set_temp_size.place(x = 200, y = 50)
+        self.initial_window()
 
 
     def open_setting(self):
@@ -120,14 +121,6 @@ class Widget_Window:
             self.Image1.place(x=int((300-w-5)/2), y=75+int((300-h)/2))
 
             self.ready = True
-
-            if self.img_refresh_time != 0:
-                try:
-                    self.alarm.cancel()
-                except:
-                    pass
-                self.alarm = threading.Timer(self.img_refresh_time * 60, self.refresh_img)
-                self.alarm.start()
         else:
             self.alarm = threading.Timer(1, self.refresh_img)
             self.alarm.start()
@@ -156,6 +149,7 @@ class Widget_Window:
         except:
             pass
         self.downloader = search.Search(self.key_word, limit=self.temp_size,  output_dir="temp", verbose=False)
+        self.ready = True
         
         self.e_key_word_text.set(self.key_word)
         self.refresh_img()
@@ -176,3 +170,48 @@ class Widget_Window:
                 temp_id = random.randint(0,len(self.picdict)-1)
             self.picid = temp_id
         return self.picdict[self.picid]
+    
+    def initial_window(self):
+        path=os.path.abspath(".\\example")
+        if not os.path.exists(path):
+            os.makedirs(path)
+
+        # files = os.listdir(path)
+        files = os.listdir(path)
+        if len(files) != 0:
+            try:
+                self.Image1.config(image='')
+            except:
+                pass
+            temp = random.choice(files)
+            while(len(files) > 1 and temp == self.filename):
+                temp = random.choice(files)
+            self.filename = temp
+            image1 = Image.open(path+"\\"+temp)
+            w,h = image1.size
+            if(w>h):
+                t = 300/w
+            else:
+                t = 300/h
+            w, h = int(w*t), int(h*t)
+            image1 = image1.resize((w,h))
+            test = ImageTk.PhotoImage(image1)
+            self.Image1 = tk.Label(image=test)
+            self.Image1.image = test
+            self.Image1.place(x=int((300-w-5)/2), y=75+int((300-h)/2))
+
+            self.ready = False
+
+            if self.img_refresh_time != 0:
+                try:
+                    self.alarm.cancel()
+                except:
+                    pass
+                self.alarm = threading.Timer(self.img_refresh_time * 60, self.refresh_img)
+                self.alarm.start()
+        else:
+            self.alarm = threading.Timer(1, self.refresh_img)
+            self.alarm.start()
+        
+        self.e_key_word_text.set("cat")
+    

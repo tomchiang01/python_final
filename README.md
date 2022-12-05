@@ -30,6 +30,7 @@ v4:<br />
 &emsp;&emsp;added btn [last picture] & remove random choose picture<br />
 &emsp;&emsp;added btn [OK] & [cancel] to setting window<br />
 &emsp;&emsp;added user-define directory to setting window<br />
+&emsp;&emsp;move keyword input to widget window<br />
 <br />
 &emsp;todo:<br />
 &emsp;&emsp;add more choices in setting<br />

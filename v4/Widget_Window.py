@@ -36,10 +36,12 @@ class Widget_Window:
         self.b_next.place(x=50, y=10)
         self.b_last = tk.Button(self.master, text ="←", command = self.last)
         self.b_last.place(x=10, y=10)
+        self.b_shuffle = tk.Button(self.master, text ="🔀", command = self.shuffle)
+        self.b_shuffle.place(x=90, y=10)
         self.b_save = tk.Button(self.master, text ="儲存", command = self.save)
-        self.b_save.place(x=90, y=10)
+        self.b_save.place(x=140, y=10)
         self.b_remove = tk.Button(self.master, text ="移除", command = self.remove)
-        self.b_remove.place(x=160, y=10)
+        self.b_remove.place(x=190, y=10)
         
         self.l_key_word = tk.Label(self.master, text = "主題: ")
         self.l_key_word.place(x = 10, y = 50)
@@ -65,6 +67,10 @@ class Widget_Window:
     def last(self):
         if self.ready:
             self.refresh_img(next=0)
+            
+    def shuffle(self):
+        if self.ready:
+            self.refresh_img(next=2)
     
     def save(self):
         if self.ready:
@@ -165,5 +171,8 @@ class Widget_Window:
         elif next== -1:
             pass
         else:
-            pass
+            temp_id = self.picid
+            while temp_id == self.picid:
+                temp_id = random.randint(0,len(self.picdict)-1)
+            self.picid = temp_id
         return self.picdict[self.picid]

@@ -11,15 +11,15 @@ class Setting_Window:
         self.widget = widget
         self.master.title("設定")
         self.master.geometry("300x300")
-        self.l_key_word = tk.Label(self.master, text = "主題: ")
-        self.l_key_word.place(x = 10, y = 10)
-        self.e_key_word_text = tk.StringVar()
-        self.e_key_word = tk.Entry(self.master, textvariable=self.e_key_word_text)
-        if self.widget.key_word == "":
-            self.e_key_word_text.set("未設定")
-        else:
-            self.e_key_word_text.set(self.widget.key_word)
-        self.e_key_word.place(x = 100, y = 10)
+        # self.l_key_word = tk.Label(self.master, text = "主題: ")
+        # self.l_key_word.place(x = 10, y = 10)
+        # self.e_key_word_text = tk.StringVar()
+        # self.e_key_word = tk.Entry(self.master, textvariable=self.e_key_word_text)
+        # if self.widget.key_word == "":
+        #     self.e_key_word_text.set("請輸入")
+        # else:
+        #     self.e_key_word_text.set(self.widget.key_word)
+        # self.e_key_word.place(x = 100, y = 10)
         
         #self.b_set_key = tk.Button(self.master, text ="確定", command = self.set_key_word)
         #self.b_set_key.place(x = 250, y = 8)
@@ -66,28 +66,28 @@ class Setting_Window:
         self.b_cancel.place(x = 235, y = 250)
         
     def set_all(self):
-        self.set_key_word()
+        # self.set_key_word()
         self.set_time()
         self.set_temp_size()
         self.set_Dir()
         
 
-    def set_key_word(self):
-        path=os.path.abspath(".\\temp")
-        temp = self.e_key_word.get()
-        if temp != self.widget.key_word:
-            if os.path.exists(path):
-                shutil.rmtree(path)
-            self.widget.key_word = temp
-        self.widget.picid = 0
-        try:
-            self.widget.downloader.kill()
-        except:
-            pass
-        self.widget.downloader = search.Search(self.widget.key_word, limit=self.widget.temp_size,  output_dir="temp", verbose=False)
+    # def set_key_word(self):
+    #     path=os.path.abspath(".\\temp")
+    #     temp = self.e_key_word.get()
+    #     if temp != self.widget.key_word:
+    #         if os.path.exists(path):
+    #             shutil.rmtree(path)
+    #         self.widget.key_word = temp
+    #     self.widget.picid = 0
+    #     try:
+    #         self.widget.downloader.kill()
+    #     except:
+    #         pass
+    #     self.widget.downloader = search.Search(self.widget.key_word, limit=self.widget.temp_size,  output_dir="temp", verbose=False)
         
-        self.e_key_word_text.set(self.widget.key_word)
-        self.widget.refresh_img()
+    #     self.e_key_word_text.set(self.widget.key_word)
+    #     self.widget.refresh_img()
         
         
     def set_time(self):

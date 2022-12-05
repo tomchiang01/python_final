@@ -27,7 +27,7 @@ class Widget_Window:
         self.master = master
         self.master.title("Widget")
         self.master.geometry("300x350")
-        self.temp_size = 100
+        self.temp_size = 20
         self.b_setting = tk.Button(self.master, text = '設定', command = self.open_setting)
         self.b_setting.place(x = 240, y = 8)
 
@@ -40,6 +40,18 @@ class Widget_Window:
         self.b_save.place(x=90, y=10)
         self.b_remove = tk.Button(self.master, text ="移除", command = self.remove)
         self.b_remove.place(x=160, y=10)
+        
+        self.l_key_word = tk.Label(self.master, text = "主題: ")
+        self.l_key_word.place(x = 10, y = 50)
+        self.e_key_word_text = tk.StringVar()
+        self.e_key_word = tk.Entry(self.master, textvariable=self.e_key_word_text)
+        if self.key_word == "":
+            self.e_key_word_text.set("請輸入")
+        else:
+            self.e_key_word_text.set(self.key_word)
+        self.e_key_word.place(x = 50, y = 50)
+        self.b_set_temp_size = tk.Button(self.master, text ="確定", command = self.set_key_word)
+        self.b_set_temp_size.place(x = 200, y = 50)
 
 
     def open_setting(self):
@@ -99,7 +111,7 @@ class Widget_Window:
             test = ImageTk.PhotoImage(image1)
             self.Image1 = tk.Label(image=test)
             self.Image1.image = test
-            self.Image1.place(x=int((300-w)/2), y=50+int((300-h)/2))
+            self.Image1.place(x=int((300-w-5)/2), y=75+int((300-h)/2))
 
             self.ready = True
 
@@ -124,6 +136,23 @@ class Widget_Window:
             self.downloader.kill()
         except:
             pass
+        
+    def set_key_word(self):
+        path=os.path.abspath(".\\temp")
+        temp = self.e_key_word.get()
+        if temp != self.key_word:
+            if os.path.exists(path):
+                shutil.rmtree(path)
+            self.key_word = temp
+        self.picid = 0
+        try:
+            self.downloader.kill()
+        except:
+            pass
+        self.downloader = search.Search(self.key_word, limit=self.temp_size,  output_dir="temp", verbose=False)
+        
+        self.e_key_word_text.set(self.key_word)
+        self.refresh_img()
         
     def choose_picture(self, next:bool):
         # temp = random.choice(files)

@@ -32,6 +32,13 @@ v4:<br />
 &emsp;&emsp;added user-define directory to setting window<br />
 &emsp;&emsp;move keyword input to widget window<br />
 <br />
+v5:<br />
+&emsp;usage:<br />
+&emsp;&emsp;py v5\main.py or open v5\main.pyw directly<br />
+&emsp;update:<br />
+&emsp;&emsp;現在移除之後的圖片不會再出現。<br />
+&emsp;&emsp;fix minor bug<br />
+<br />
 &emsp;todo:<br />
 &emsp;&emsp;add more choices in setting<br />
 &emsp;&emsp;improve the setting window ui<br />

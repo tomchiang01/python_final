@@ -39,9 +39,13 @@ v5:<br />
 &emsp;&emsp;現在移除之後的圖片不會再出現。<br />
 &emsp;&emsp;fix minor bug<br />
 <br />
+v6:<br />
+&emsp;usage:<br />
+&emsp;&emsp;py v6\main.py or open v6\main.pyw directly<br />
+&emsp;update:<br />
+&emsp;&emsp;新增圖庫定時自動更新功能<br />
+<br />
 &emsp;todo:<br />
-&emsp;&emsp;add more choices in setting<br />
-&emsp;&emsp;improve the setting window ui<br />
-&emsp;&emsp;use mouse motion to replace button in widget window<br />
+&emsp;&emsp;improve the widget window ui<br />
 &emsp;&emsp;pack as apk file
 
